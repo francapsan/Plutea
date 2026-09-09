@@ -1,0 +1,28 @@
+.main-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-layout__content {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: var(--space-page);
+  background:
+    linear-gradient(180deg, rgba(243, 236, 224, 0.3), transparent 18%),
+    var(--color-wall);
+}
+
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .main-layout__content {
+    overflow: visible;
+  }
+}

@@ -1,0 +1,6 @@
+.shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: 2.4rem 1.15rem;
+  padding: 0.5rem 0.5rem 1.25rem;
+}

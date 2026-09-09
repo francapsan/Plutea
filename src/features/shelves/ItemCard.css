@@ -1,0 +1,19 @@
+.item-card {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  background: var(--color-slot);
+  border: 2px dashed var(--color-slot-border);
+  border-radius: var(--radius-slot);
+}
+
+.item-card::after {
+  content: '';
+  position: absolute;
+  left: -0.4rem;
+  right: -0.4rem;
+  bottom: -0.7rem;
+  height: 0.45rem;
+  background: linear-gradient(180deg, var(--color-wood), var(--color-wood-dark));
+  border-radius: 1px;
+  box-shadow: 0 3px 0 rgba(44, 36, 28, 0.12);
+}

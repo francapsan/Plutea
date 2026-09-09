@@ -4,27 +4,27 @@ PLUTEA es una plataforma web para gestionar colecciones de entretenimiento digit
 
 El producto se concibe como un agregador visual unificado, frente a herramientas fragmentadas por medio (literatura, cine, videojuegos).
 
-## Stack tecnológico (Fase 1)
+## Stack tecnológico (Fase 2)
 
 - **React** — componentes UI modulares
 - **CSS moderno** — Flexbox y Grid (sin librerías de UI)
 - **Vite** — entorno de desarrollo y empaquetado
 
-Esta fase no incluye APIs, estado de datos ni contenido simulado: solo estructura visual con placeholders.
+Esta fase no incluye APIs ni catálogo: la navegación y las fichas son solo estructura visual con placeholders.
 
 ## Estado
 
-**Fase 1 — Esqueleto Visual y Maquetación**
+**Fase 2 — Navegación de Mi Habitación y superficies de interacción**
 
-Objetivo: definir el wireframe en código (sidebar fijo, área de contenido y cuadrícula de huecos vacíos en la estantería) para validar el layout y el comportamiento responsive.
+Objetivo: recorrer el layout como si fuera la habitación del usuario. El menú cambia de vista, la barra de búsqueda ocupa su lugar y cada hueco abre una ficha vacía.
 
 ## Estructura
 
 ```
 src/
-├── components/layout/   Sidebar y contenedor principal
-├── features/shelves/     Huecos (ItemCard) y cuadrícula (ShelfGrid)
-└── pages/                Vista Dashboard
+├── components/layout/   Sidebar, TopBar y contenedor principal
+├── features/shelves/     Huecos, cuadrícula y ficha placeholder
+└── pages/                Vista Dashboard (habitación y estantería)
 ```
 
 ## Instalación

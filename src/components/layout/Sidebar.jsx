@@ -1,8 +1,7 @@
+import { PLACEHOLDER_SHELVES, ROOM_VIEW } from '../../features/shelves/placeholders'
 import './Sidebar.css'
 
-const PLACEHOLDER_SHELVES = ['Estantería 1', 'Estantería 2', 'Estantería 3']
-
-export function Sidebar() {
+export function Sidebar({ view, onNavigate }) {
   return (
     <aside className="sidebar">
       <div className="sidebar__brand">
@@ -17,12 +16,41 @@ export function Sidebar() {
         </div>
       </div>
 
+      <nav className="sidebar__nav" aria-label="Habitación">
+        <p className="sidebar__label">Espacio</p>
+        <ul className="sidebar__list">
+          <li>
+            <button
+              type="button"
+              className={
+                view === ROOM_VIEW
+                  ? 'sidebar__item sidebar__item--active'
+                  : 'sidebar__item'
+              }
+              onClick={() => onNavigate(ROOM_VIEW)}
+            >
+              Mi Habitación
+            </button>
+          </li>
+        </ul>
+      </nav>
+
       <nav className="sidebar__nav" aria-label="Estanterías">
         <p className="sidebar__label">Estanterías</p>
         <ul className="sidebar__list">
-          {PLACEHOLDER_SHELVES.map((name) => (
-            <li key={name}>
-              <span className="sidebar__item">{name}</span>
+          {PLACEHOLDER_SHELVES.map((shelf) => (
+            <li key={shelf.id}>
+              <button
+                type="button"
+                className={
+                  view === shelf.id
+                    ? 'sidebar__item sidebar__item--active'
+                    : 'sidebar__item'
+                }
+                onClick={() => onNavigate(shelf.id)}
+              >
+                {shelf.name}
+              </button>
             </li>
           ))}
         </ul>

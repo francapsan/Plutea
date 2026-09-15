@@ -10,6 +10,20 @@
   cursor: pointer;
 }
 
+.item-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.item-card--filled {
+  border-style: solid;
+  border-color: var(--color-wood-dark);
+}
+
 .item-card:focus-visible {
   outline: 2px solid var(--color-wood);
   outline-offset: 3px;

@@ -2,45 +2,59 @@
 
 PLUTEA es una plataforma web para gestionar colecciones de entretenimiento digital (libros, videojuegos, cine y más) mediante **estanterías visuales**. En lugar de listas de texto, las portadas ocupan el centro de la interfaz: cada usuario dispone de un espacio propio —*Mi Habitación*— donde coleccionar, organizar y consultar sus obras.
 
-El producto se concibe como un agregador visual unificado, frente a herramientas fragmentadas por medio (literatura, cine, videojuegos).
+## Stack
 
-## Stack tecnológico (Fase 2)
-
-- **React** — componentes UI modulares
-- **CSS moderno** — Flexbox y Grid (sin librerías de UI)
-- **Vite** — entorno de desarrollo y empaquetado
-
-Esta fase no incluye APIs ni catálogo: la navegación y las fichas son solo estructura visual con placeholders.
+- **Frontend:** React + CSS (Flexbox/Grid) + Vite
+- **Backend:** Python FastAPI (agregador BFF)
+- **Catálogo:** Hardcover (principal) + Open Library (apoyo para portadas/sinopsis)
 
 ## Estado
 
-**Fase 2 — Navegación de Mi Habitación y superficies de interacción**
+**Fase 4 — Backend de búsqueda**
 
-Objetivo: recorrer el layout como si fuera la habitación del usuario. El menú cambia de vista, la barra de búsqueda ocupa su lugar y cada hueco abre una ficha vacía.
+El frontend de habitación y estanterías sigue siendo visual. La búsqueda consulta `GET /api/search`: **Hardcover** si hay token, y **Open Library** si falta el token, Hardcover falla o no hay resultados. Videojuegos, cine y PostgreSQL quedan para más adelante.
 
 ## Estructura
 
 ```
-src/
-├── components/layout/   Sidebar, TopBar y contenedor principal
-├── features/shelves/     Huecos, cuadrícula y ficha placeholder
-└── pages/                Vista Dashboard (habitación y estantería)
+src/                 Frontend React
+backend/
+├── app/
+│   ├── main.py              FastAPI, CORS y /health
+│   ├── api/routes/search.py GET /api/search
+│   ├── services/            Hardcover y Open Library
+│   └── schemas/search.py    Contrato unificado
+└── .env.example
 ```
 
-## Instalación
-
-Requisitos: [Node.js](https://nodejs.org/) 18 o superior.
+## Frontend
 
 ```bash
 npm install
 npm run dev
 ```
 
-La aplicación quedará disponible en `http://localhost:5173`.
+Vite queda en `http://localhost:5173` y reenvía `/api` al backend (`http://127.0.0.1:8000`).
 
-Otros comandos:
+## Backend
+
+Requisitos: Python 3.12 o superior.
 
 ```bash
-npm run build    # Compilación de producción
-npm run preview  # Vista previa del build
+cd backend
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+copy .env.example .env
+uvicorn app.main:app --reload --port 8000
+```
+
+En macOS/Linux: `source .venv/bin/activate` y `cp .env.example .env`.
+
+Documentación interactiva: `http://127.0.0.1:8000/docs`.
+
+Copia `backend/.env.example` a `backend/.env`. Crea un token en Hardcover (cuenta → Hardcover API) y pégalo en `HARDCOVER_API_TOKEN`. El archivo `.env` queda fuera de Git: no lo subas a GitHub. Sin token, la búsqueda usa solo Open Library.
+
+```bash
+curl "http://127.0.0.1:8000/api/search?q=dune"
 ```

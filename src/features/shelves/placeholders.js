@@ -5,3 +5,4 @@ export const PLACEHOLDER_SHELVES = [
 ]
 
 export const ROOM_VIEW = 'room'
+export const SEARCH_VIEW = 'search'
